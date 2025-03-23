@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+{% load static %}
+{% load socialaccount %}
+{% block head %}
+  <!-- Font Icon -->
+  <link rel="stylesheet" href="{% static 'fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="{% static 'auth/css/style.css' %}">
+  <style>
+    .container {
+      background-color: transparent;
+      width: 90%;
+    }
+    .main .container {
+      background-color: white !important;
+      width: 60%;
+    }
+    .main {
+      padding: 0;
+      margin: 0;
+    }
+    .nav-link {
+      color: #666666 !important;
+    }
+    #signup {
+      background: #719a0a;
+    }
+    .toggle-btns {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .toggle-btn {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+      margin: 0 0.5rem;
+    }
+    .toggle-btn.active {
+      background-color: #719a0a;
+      color: white;
+      border-color: #719a0a;
+    }
+    /* Google Button Styling */
+    .google-btn {
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: 600;
+      width: 100%;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .form-button {
+      width: 100%;
+      
+    }
+    .google-btn i {
+      margin-right: 10px;
+    }
+ 
+    /* Hide restaurant field by default */
+    #restaurantField {
+      display: none;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+
+{% if status %}
+<script>
+    alert('{{status}}');
+</script>
+{% endif %}
+
+{% if error %}
+<script>
+    alert('{{error}}');
+</script>
+{% endif %}
+
+<div class="main">
+  <!-- Sign up Form -->
+  <section class="signup" style="padding-top:100px;">
+    <div class="container main-container p-0">
+      <div class="signup-content">
+        <div class="signup-form">
+          <h2 class="form-title">Sign up</h2>
+          <h3>As</h3>
+          <div class="toggle-btns">
+            <div id="customerToggle" class="btn toggle-btn active" onclick="toggleLogin('customer')">Customer</div>
+            <div id="restaurantToggle" class="btn toggle-btn" onclick="toggleLogin('restaurant')">Restaurant</div>
+          </div>
+         
+          <!-- Toggle Buttons for Customer / Restaurant -->
+          
+
+          <form method="POST" class="register-form" action="">
+            <div id="msz"></div>
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+              <input type="text" name="name" id="name" placeholder="Your Name" required />
+            </div>
+            <!-- Restaurant Name: Shown only if "Restaurant" is selected -->
+            <div class="form-group" id="restaurantField">
+              <label for="rest_name"><i class="zmdi zmdi-store"></i></label>
+              <input type="text" name="restaurant_name" id="rest_name" placeholder="Restaurant Name" />
+            </div>
+            <div class="form-group">
+              <label for="email"><i class="zmdi zmdi-email"></i></label>
+              <input type="email" name="email" id="email" placeholder="Your Email" required onkeyup="check_email()" />
+            </div>
+            <div class="form-group">
+              <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+              <input type="password" name="pass" id="pass" placeholder="Password" onkeyup="checkPass()" required />
+            </div>
+            <div class="form-group">
+              <label for="re_pass"><i class="zmdi zmdi-lock-outline"></i></label>
+              <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password" onkeyup="checkPass()" required />
+            </div>
+            <div class="form-group">
+              <label for="contact"><i class="zmdi zmdi-phone"></i></label>
+              <input type="text" name="number" id="contact" placeholder="Contact Number" pattern="[0-9]{10}" title="Number must contain 10 digits only!" required />
+            </div>
+            <input type="hidden" name="user_type" id="login_type" value="customer">
+            <a href="{% url 'login' %}" class="signup-image-link">I have an account!</a>
+
+            <div class="form-group form-button">
+              <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+            </div>
+          </form>
+        </div>
+        <div class="signup-image">
+           <!-- Continue with Google Button -->
+          <div class="text-center my-4 font-semibold text-gray-600" id="customerField">
+            
+            <a href="{% provider_login_url 'google' process='signup' %}"  class="btn custom-btn google-btn">
+                <i class="fab fa-google"></i> Sign in with Google
+            </a></div>
+
+          <figure>
+            <img src="{% static 'img/image.png' %}" alt="sign up image">
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+  function toggleLogin(type) {
+    const customerBtn = document.getElementById("customerToggle");
+    const restaurantBtn = document.getElementById("restaurantToggle");
+    // Set active state and toggle restaurant field visibility
+    if (type === 'customer') {
+      customerBtn.classList.add("active");
+      restaurantBtn.classList.remove("active");
+      document.getElementById("customerField").style.display = "block";
+      document.getElementById("restaurantField").style.display = "none";
+    } else {
+      restaurantBtn.classList.add("active");
+      customerBtn.classList.remove("active");
+      document.getElementById("customerField").style.display = "none";
+      document.getElementById("restaurantField").style.display = "block";
+    }
+    // Set the hidden field value
+    document.getElementById("login_type").value = type;
+    document.getElementById("customerToggle").classList.toggle("active", type === "customer");
+    document.getElementById("restaurantToggle").classList.toggle("active", type === "restaurant");
+    sessionStorage.setItem('user_type', type);
+    document.cookie = "user_type=" + sessionStorage.getItem('user_type') + "; path=/;";
+    document.getElementById("rest_name").addEventListener("input", function() {
+      var restaurantName = this.value;
+      // Use encodeURIComponent to ensure the value is safe for a cookie
+      document.cookie = "restaurant_name=" + encodeURIComponent(restaurantName) + "; path=/;";
+      console.log("restaurant_name cookie set to:", restaurantName);
+    });
+
+  }
+  function checkPass() {
+    var p = $('#pass').val();
+    var cp = $('#re_pass').val();
+    if (p == cp) {
+      $("#signup").attr('disabled', false).css({'background': '#6dabe4'});
+      $('#msz').html('');
+    } else {
+      $("#signup").attr('disabled', true).css({'background': 'red'});
+      $('#msz').html("<small>Password didn't match!</small>");
+    }
+  }
+
+  function check_email() {
+    var email = document.getElementById('email').value;
+    $.ajax({
+      url: '{% url "check_user_exist" %}',
+      type: 'get',
+      data: { usern: email },
+      success: function(data) {
+        if (data.status == 0) {
+          $("#signup").attr('disabled', false).css({'background': '#719a0a'});
+          $('#msz').html('');
+        } else {
+          $("#signup").attr('disabled', true).css({'background': 'red'});
+          $('#msz').html("<small>" + data.message + "</small>");
+        }
+      }
+    });
+  }
+</script>
+{% endblock %}

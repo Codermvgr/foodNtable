@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Add Gallery Image{% endblock %}
+{% block css %}
+<style>
+    .container {
+      background-color: transparent;
+      width: 60%;
+    }
+    .main .container {
+      background-color: white !important;
+      width: 60%;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-header mb-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>Restaurant Details</h2>
+            </div>
+            <div class="col-12">
+                <a href="{% url 'restaurants' %}">Restaurants</a>
+                <a href="{% url 'restaurant_detail' restaurant.id %}">{{ restaurant.name }}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Add New Gallery Image</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button class="btn custom-btn" type="submit">Upload Image</button>
+    </form>
+    <hr>
+    <a href="{% url 'restaurant_detail' restaurant.id %}">⬅️ Back to Restaurant</a>
+</div>
+{% endblock %}

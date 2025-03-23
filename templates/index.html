@@ -1,0 +1,302 @@
+{% extends "base.html" %}
+
+{% block head%}
+    <style>
+        .slider_width{
+            max-width: 1600px;
+        }
+       
+        .pic{
+        background-color: gray;
+        color: white;
+        display: inline-block;
+        height: 100px;width: 100px;
+        border-radius: 50%;
+        margin: 30px 0px;
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 100px;
+        box-shadow: 0px 0px 1px gray;
+    }
+    </style>
+{%endblock%}
+
+
+{% block content %}
+        <!-- Carousel Start -->
+        <div class="carousel w">
+            <div class="container-fluid slider_width">
+                <div class="owl-carousel">
+                    <div class="carousel-item">
+                        <div class="carousel-img">
+                            <img src="/static/img/carousel-food.jpeg" alt="Image">
+                        </div>
+                        <div class="carousel-text">
+                            <h1>Best <span>Quality</span> Ingredients</h1>
+                            <p>
+                                We use only the freshest and finest ingredients to ensure every dish is a masterpiece of flavor and quality.
+                            </p>
+                            <div class="carousel-btn">
+                                <a href="{% url 'all_dishes' %}" class="btn custom-btn" >View Menu</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carousel-img">
+                            <img src="/static/img/carousel-chefs.jpeg" alt="Image">
+                        </div>
+                        <div class="carousel-text">
+                            <h1>World-Class <span>Top</span> Chefs</h1>
+                            <p>  
+                                Enjoy dishes crafted by expert chefs from around the world, bringing authentic flavors and exceptional taste to your table.                            </p>
+                            <div class="carousel-btn">
+                                <a href="{% url 'all_dishes' %}" class="btn custom-btn" >Order Now!</a>
+                                <a class="btn custom-btn" href="{% url 'restaurants' %}">View Restaurants</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carousel-img">
+                            <img src="/static/img/carousel-dining.jpeg" alt="Image">
+                        </div>
+                        <div class="carousel-text">
+                            <h1>Premium  <span>Dining </span>Experience</h1>
+                            <p>
+                                Dine in style at top-rated restaurants, where ambiance meets excellence for a truly unforgettable culinary journey.                            </p>
+                            <div class="carousel-btn">
+                                <a class="btn custom-btn" href="{% url 'all_dishes' %}">View Menu</a>
+                                <a class="btn custom-btn" href="{% url 'restaurants' %}">Book Table</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Carousel End -->
+
+        <!-- About Start -->
+        <div class="about">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="about-img">
+                            <img src="/static/img/table.png" alt="Image">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="about-content">
+                            <div class="section-header">
+                                <p>About Us</p>
+                            </div>
+                            <div class="about-text">
+                                <p>
+                                    Welcome to Food N Table, your go-to platform for seamless table reservations and online food ordering from the best restaurants in town. Whether you're craving a fine dining experience or a quick takeaway, we've got you covered.                                </p>
+                                <p>
+                                    we started with a mission to make dining out hassle-free and convenient for everyone.we've partnered with top restaurants, ensuring that food lovers get the best service with just a few clicks.                                </p>
+                                <a class="btn custom-btn" href="{% url 'restaurants' %}">Book A Table</a> <span> or </span> <a class="btn custom-btn" href="{% url 'all_dishes' %}">Order Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+        
+        
+        <!-- Feature Start -->
+        <div class="feature">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="section-header">
+                            <p>Why Choose Us</p>
+                            <h2>Our Key Features</h2>
+                        </div>
+                        <div class="feature-text">
+                            <div class="feature-img">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <img src="/static/img/indoor-dining.png" alt="Image">
+                                    </div>
+                                    <div class="col-6">
+                                        <img src="/static/img/food-1.jpeg" alt="Image">
+                                    </div>
+                                    <div class="col-6">
+                                        <img src="/static/img/food-2.jpeg" alt="Image">
+                                    </div>
+                                    <div class="col-6">
+                                        <img src="/static/img/food-3.jpeg" alt="Image">
+                                    </div>
+                                    <div class="col-6">
+                                        <img src="/static/img/food-4.jpeg" alt="Image">
+                                    </div>
+                                    <div class="col-6">
+                                        <img src="/static/img/outdoor-dining.png" alt="Image">
+                                    </div>
+                                </div>
+                            </div>
+                            <p>At Food N Table, we connect food lovers with the best restaurants, offering seamless food ordering, table reservations, and top-quality service. 
+                                We partner with the best restaurants, featuring expert chefs who prepare delicious meals with passion and skill.</p>
+                            <a class="btn custom-btn" href="{% url 'restaurants' %}">Book A Table</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="feature-item">
+                                    <i class="flaticon-cooking"></i>
+                                    <h3>Top rated Restaurants & Chefs</h3>
+                                    <p>
+                                        We partner with the best restaurants, featuring expert chefs who prepare delicious meals with passion and skill.</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="feature-item">
+                                    <i class="flaticon-vegetable"></i>
+                                    <h3>Fresh & Natural ingredients</h3>
+                                    <p>
+                                        Restaurants on our platform use only the finest ingredients, ensuring great taste and high nutritional value.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="feature-item">
+                                    <i class="flaticon-medal"></i>
+                                    <h3>Best quality products</h3>
+                                    <p>
+                                        Reserve your table at top-rated restaurants in just a few clicks. No waiting, no hassle—just a perfect dining experience.</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="feature-item">
+                                    <i class="flaticon-meat"></i>
+                                    <h3>Wide variety of cuisines</h3>
+                                    <p>
+                                        From Indian spices to Italian pasta, Chinese flavors to American burgers—explore a diverse range of dishes from multiple restaurants in one place.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="feature-item">
+                                    <i class="flaticon-courier"></i>
+                                    <h3>Fast & reliable food delivery</h3>
+                                    <p>
+                                        Craving your favorite meal? Get quick and reliable food delivery from your preferred restaurants right to your doorstep.</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="feature-item">
+                                    <i class="flaticon-fruits-and-vegetables"></i>
+                                    <h3>Customer Reviews & Ratings</h3>
+                                    <p>
+                                        Check real customer reviews and ratings before ordering to ensure the best dining experience.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Feature End -->
+        
+        
+        <!-- Menu Start -->
+        <div class="menu">
+            <div class="container">
+                <div class="section-header text-center">
+                    <p>Food Menu</p>
+                    <h2>Delicious Food Menu</h2>
+                </div>
+                <div class="menu-tab">
+                    <ul class="nav nav-pills justify-content-center">
+                        {% for cat in categories %}
+                            <div class="col-md-4">
+                                <div class="food-item">
+                                    <i class="{{cat.icon}}"></i>
+                                    <h2>{{cat.name | title}}</h2>
+                                    <p>
+                                        {{cat.description}}
+                                    </p>
+                                    <a href="{% url 'all_dishes' %}?category={{cat.id}}">View Menu</a>
+                                </div>
+                            
+                            </div>
+                        {% endfor %}
+                    </ul>
+                    <div class="tab-content">
+                        {% for category in menu %}
+                        <div id="c-{{category.cat_id}}" class="container tab-pane">
+                            <div class="row">
+                                {% if category.items|length == 0 %}
+                                 <div class="col-md-12 text-center"><h3>No Items under {{category.name}} Yet..</h3></div>
+                                {% else %}
+                                <div class="col-lg-7 col-md-12">
+                                {% for item in category.items %}
+                                    <div class="menu-item">
+                                        <div class="menu-img">
+                                            {% if item.image %}
+                                            <img src="/media/{{item.image}}" alt="Image">
+                                            
+                                            <!-- <img src="/static/img/food-1.jpg" alt="Image"> -->
+                                            {% endif %}
+                                        </div>
+                                        <div class="menu-text">
+                                            <h3><span><a href="{% url 'dish' item.id %}">{{item.name}}</a></span> 
+                                                {% if item.price != item.discounted_price %}
+                                                 <strong><del>&dollar;{{item.price}}</del></strong>
+                                                {% endif %}
+                                                 <strong>&dollar;{{item.discounted_price}}</strong>
+                                            </h3>
+                                            <p>{{item.ingredients}}</p>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                </div>
+                                <div class="col-lg-5 d-none d-lg-block">
+                                    {% if category.cat_img %}
+                                    <img src="/media/{{category.cat_img}}" style="height:100%;width:100%;" alt="Image">
+                                    {% endif %}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Menu End -->
+        
+        
+        <!-- Testimonial Start -->
+        <div class="team">
+            <div class="testimonial">
+                <div class="section-header text-center">
+                    <p>Our Reviews</p>
+                    <h2>Reviews</h2>
+                </div>
+                <div class="container">
+                    <div class="owl-carousel testimonials-carousel">
+                        {% for review in reviews %}
+                        <div class="testimonial-item">
+                            <div class="testimonial-img dash-content">
+                                <span class='pic'>{{review.user.first_name.0}}</span>
+                                                         
+                            </div>
+                            <p>@{{review.user.username}}</p>   
+                            <h2>{{review.rating}}/5</h2>
+                            <p>{{review.comment}}</p>
+                            <h2>{{review.item.name}}</h2>
+                            <h3>{{review.restaurant.name}}</h3>
+                        </div>
+                        {% endfor %}
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Testimonial End -->
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+        <!-- Page Header Start -->
+        <div class="page-header mb-0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Explore Restaurants</h2>
+                    </div>
+                    <div class="col-12">
+                        <a href="/">Home</a>
+                        <a href="{% url 'restaurants' %}">Restaurants</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page Header End -->
+        
+
+        <!-- Restaurants Start -->
+        <div class="team">
+            <div class="container">
+                <div class="section-header">
+                    <p>Our Restaurants</p>
+                    <h2>Available Restaurants ({{restaurants|length}})</h2>
+                </div>
+                <div class="row">
+                {% for restaurant in restaurants %}
+                    <div class="col-lg-3 col-md-6">
+                        <div class="team-item">
+                            <div class="team-img">
+                                {% if restaurant.image %}
+                                <img src="/media/{{restaurant.image}}" style="height:250px; " alt="{{restaurant.name}}">
+                                {% else %}
+                                <img src="/static/img/restaurant.png" style="height:250px;" alt="restaurant image" >
+                                {% endif %}
+                            </div>
+                            <div class="team-text">
+                                <h2><a href="{% url 'restaurant_detail' restaurant.id %}">{{restaurant.name}} </a></h2>
+                                <!-- <p>{{restaurant.address}}</p> -->
+                                <p><small>Added On: {{restaurant.created_at}}</small></p>
+                                <div class="carousel-btn">
+                                    <a href="{% url 'book_table' restaurant.id %}" class="btn custom-btn">
+                                        <!-- <i class="fas fa-shopping-cart"></i>  -->
+                                       Book a Table
+                                    </a>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- Restaurants End -->
+
+{% endblock %}

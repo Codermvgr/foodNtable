@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- Page Header Start -->
+<div class="page-header mb-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>{{dish.name}}</h2>
+            </div>
+            <div class="col-12">
+                <a href="/dishes/?q={{dish.category.id}}">{{dish.category.name}}</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+<!-- Food Start -->
+<div class="food mt-0">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6 mx-auto">
+                <div class="food-item">
+                   
+                    <img src="/media/{{dish.image}}" style="height: 300px;width: 100%;">
+                    <h2 class="my-3">{{dish.name}}</h2>
+                    <p>
+                        {{dish.description}}
+                    </p>
+                    <h4 class="menu-text" style="font-weight: normal;">
+                            <strong>&#8377;{{dish.price}}</strong>
+                    </h4>
+                    <button><a href="{% url 'add_to_cart' dish.id %}" class="btn">Order Now</a></button>
+                    <br>
+                    <a href="/dishes/?q={{dish.category.id}}">More Dishes under {{dish.category.name}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Food End -->
+{% endblock %}

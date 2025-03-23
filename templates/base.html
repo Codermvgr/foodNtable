@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Food N Table</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        
+        <!-- Favicon -->
+        <link href="/static/img/favicon.ico" rel="icon">
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Nunito:600,700" rel="stylesheet"> 
+        
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <!-- <link href="/static/lib/animate/animate.min.css" rel="stylesheet"> -->
+        <link href="/static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="/static/lib/flaticon/font/flaticon.css" rel="stylesheet">
+        <!-- <link href="/static/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" /> -->
+        <!-- Template Stylesheet -->
+      
+        <link href="/static/css/style.css" rel="stylesheet">
+        
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtQ_cbdfgnh6Jvc15g6btxCoomYcSjrKI&libraries=places"></script>
+        <style>
+           .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;  /* Increase top margin to move modal downward */
+            padding: 5px;
+            width: 50%;
+            text-align: center;
+            border-radius: 8px;
+            position: relative;  /* Make it relative so that the close icon is positioned within it */
+        }
+
+        .close {
+            position: absolute;  /* Position the close icon absolutely */
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+
+        </style>
+        
+        {% block head %} {% endblock %}
+        {% block css %} {% endblock %}
+        
+    </head>
+
+<body> 
+        <div class="navbar navbar-expand-lg bg-light navbar-light">
+            <div class="container-fluid flex justify-content-between">
+                    <a href="{% url 'index' %}" class="navbar-brand">Food<span>N</span>Table</a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                            <div class="navbar-nav mx-auto">
+                              <a href="{% url 'index' %}" class="nav-item nav-link active">Home</a>
+                              <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
+                              <a href="{% url 'restaurants' %}" class="nav-item nav-link">Restaurants</a>
+                              <a href="{% url 'all_dishes' %}" class="nav-item nav-link">Menu</a>
+                              <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
+                              
+                            
+
+                                  
+                            </div>
+                            <div>
+                                {% if user.is_authenticated %}
+                                <div class="carousel-btn">
+                                {% if user.is_superuser or user.is_staff %}
+                                <a href="{% url 'admin:index' %}" class="btn custom-btn"><i class="fas fa-user"></i></a>
+                                {% else %}
+                                <a href="{% url 'dashboard' %}" class="btn custom-btn"><i class="fas fa-user"></i></a>
+                                {% if profile.user_type == 'customer' %}
+                                <a href="{% url 'cart' %}" class="btn custom-btn"><i class="fas fa-shopping-cart"></i></a>
+                                {% endif %}
+                                {% endif %}
+                                <a href="#" id="locationBtn" class="btn custom-btn"><i class="fas fa-map-marker-alt"></i></a>
+                                <a href="{% url 'logout' %}" class="btn custom-btn"><i class="fas fa-sign-out-alt"></i></a>
+                                {% else %}
+                                <a href="{% url 'login' %}" ><img class="login-img" src="{% static 'img/login.gif' %}"></img></a>
+                               {% endif %}
+                            </div>
+                                <form action="{% url 'save_location' %}" id="locationForm" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" id="locationField" name="address"/>
+                                    <input type="hidden" id="latitude" name="latitude">
+                                    <input type="hidden" id="longitude" name="longitude">
+                                    <button type="submit" hidden>Save Location</button>
+                                </form>
+                                {% include 'map.html' %}
+                             </div>
+                          </div>
+                          
+                    </div>
+            </div>  
+            
+        </div>
+        <!-- Django Flash Messages -->
+        {% if messages %}
+        <div id="flash-messages" class="container mt-3 alert" style="padding-top:100px;">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                setTimeout(function () {
+                    $(".alert").fadeOut("slow", function () { 
+                        $(this).remove(); 
+                    });
+                }, 5000);
+            });
+          
+            // Ensure Bootstrap alerts close properly
+            $(document).on("click", ".alert-dismissible .close", function () {
+                $(this).closest(".alert").fadeOut("slow", function () { 
+                    $(this).remove(); 
+                });
+            });
+        </script>
+        {% endif %}
+
+        <!-- Nav Bar End -->
+        
+        {% block content %}
+
+        {% endblock %}
+        <!-- Footer Start -->
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="footer-contact">
+                                    <h2>Our Address</h2>
+                                    <p><i class="fa fa-map-marker-alt"></i>chintalavasa,Vizianagaram,A.P</p>
+                                    <p><i class="fa fa-phone-alt"></i>+91 80193 00000</p>
+                                    <p><i class="fa fa-envelope"></i>yourfoodntable@gmail.com</p>
+                                    <div class="footer-social">
+                                        <a href=""><i class="fab fa-twitter"></i></a>
+                                        <a href=""><i class="fab fa-facebook-f"></i></a>
+                                        <a href=""><i class="fab fa-youtube"></i></a>
+                                        <a href=""><i class="fab fa-instagram"></i></a>
+                                        <a href=""><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="footer-link">
+                                    <h2>Quick Links</h2>
+                                    <a href="">Terms of use</a>
+                                    <a href="">Privacy policy</a>
+                                    <a href="">Cookies</a>
+                                    <a href="">Help</a>
+                                    <a href="">FQAs</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="footer-newsletter">
+                            <h2>Newsletter</h2>
+                            <p>
+                                Stay updated with the latest restaurant deals, new features, and exclusive discounts!
+                            </p>
+                            <h4>📩 Subscribe to our newsletter</h4>
+                            <form method="POST" action="{% url 'subscribe_newsletter' %}">
+                                {% csrf_token %}
+                                <div class="form">
+                                    <input class="form-control" type="email" name="email" placeholder="Enter your email" required class="form-control">
+                                    <button class="btn custom-btn" type="submit">Subscribe</button>
+                                </div>
+                            </form>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <div class="container">
+                    <p>Copyright &copy; <a href="#">FoodNTable</a>, All Right Reserved.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+        <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        
+        <!-- Contact Javascript File -->
+        <script src="/static/mail/jqBootstrapValidation.min.js"></script>
+        <script src="/static/mail/contact.js"></script>
+
+
+        <script src="/static/lib/easing/easing.min.js"></script>
+        <script src="/static/lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="/static/lib/tempusdominus/js/moment.min.js"></script>
+        <script src="/static/lib/tempusdominus/js/moment-timezone.min.js"></script>
+        <script src="/static/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+        
+       
+        <!-- Template Javascript -->
+        <script src="/static/js/main.js"></script>
+       
+        {% block script %}
+        
+        
+        {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Dishes{% endblock %}
+{% block css %}
+<style>
+    .search{
+        display: inline-flex;
+        
+    }
+</style>
+{% endblock %}
+{% block content %}
+<!-- Page Header Start -->
+<div class="page-header mb-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>{% if dish_category %} {{dish_category}} {% else %}Dishes {% endif %}({{dishes|length}})</h2>
+            </div>
+            <div class="col-12">
+                <a href="/">Home</a>
+                <a href="/dishes">Dishes</a>
+                <a href="#"></a>
+                 
+            </div>          
+            <div class="col-12">
+                <form method="GET" action="{% url 'all_dishes' %}" class="search form-inline mb-3">
+                    <input type="text" name="q" class="form-control" placeholder="Search dishes, restaurants, categories..." value="{{ request.GET.q }}">
+                    <button type="submit" class="btn btn-primary ml-2">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+       
+          
+
+    </div>
+</div>
+<!-- Page Header End -->
+
+
+<!-- Food Start -->
+<div class="food mt-0">
+    <div class="container">
+        <div class="row align-items-center">
+            {% for i in dishes %}
+            <div class="col-md-4">
+                {% if i.is_available %}
+                <div class="food-item">
+                {% else %}
+                <div class="food-item" style="background-color: lightgray;">
+                {% endif %}
+                    {% if i.image %}
+                    <img src="/media/{{ i.image }}" alt="{{ i.name }} image" style="height: 200px;width: 100%;">
+                    {% else %}
+                    <a href="#" target="_blank"><img src="/media/restaurant.mp4" alt="{{ i.name }} image" style="height: 200px;width: 100%;"></a>
+                    {% endif %}
+                    <h4 class="my-3">{{ i.name | title}} </h4>
+                    <!-- <p>{{ i.description }}</p> -->
+                    <small>By {{ i.restaurant }}</small>
+                    <h4>
+                        <strong>&#8377;{{ i.price }}</strong>
+                        <!-- <button class="btn btn-success">
+                            <a href="{% url 'dish' i.id %}" style="color: inherit; text-decoration: none;">
+                                Order Now
+                            </a>
+                        </button> -->
+                    </h4>
+                    <!-- Add to Cart Button with icon -->
+                    {% if request.user.is_authenticated %}
+                    <div class="carousel-btn">
+                        <a href="{% url 'add_to_cart' i.id %}" class="btn custom-btn">
+                            <!-- <i class="fas fa-shopping-cart"></i>  -->
+                            Add to Cart
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Food End -->
+{% endblock %}

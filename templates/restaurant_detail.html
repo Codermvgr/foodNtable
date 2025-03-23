@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="page-header mb-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>Restaurant Details</h2>
+            </div>
+            <div class="col-12">
+                <a href="">Restaurants</a>
+                <a href="{% url 'restaurant_detail' restaurant.id %}">{{ restaurant.name }}</a>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="restaurant-container">
+    <div class="container">
+        <div class="row align-items-center">
+            
+        <div class="col-lg-6">
+            <h1>{{ restaurant.name | title}}</h1>
+            <p><strong>About:</strong> {{ restaurant.about }}</p>
+            <p><strong>Address:</strong> {{ restaurant.address }}<a href="https://www.google.com/maps?q={{ restaurant.name }},{{ restaurant.address }}" target="_blank">📍 Get Directions</a></p>
+            <p><strong>Contact:</strong> {{ restaurant.contact_number }}<a href="tel:{{ restaurant.contact_number }}">📞 Call Now</a></p>
+            <p><strong>Status:</strong> {% if restaurant.is_open %} Open {% else %} Closed {% endif %}</p>
+            <p><strong>Timings:</strong> {{ restaurant.opens_at }} - {{ restaurant.closes_at }}</p>
+            <p><strong>Cuisine:</strong> {{ restaurant.cuisine_type }}</p>
+            <p><strong>Price for Two:</strong> {{ restaurant.price_for_two }}</p>
+            <p><strong>Is Open:</strong>{% if restaurant.is_open %} Yes {% else %} No {% endif %}</p>
+            <p><strong>Rating:</strong> {{ restaurant.rating }}</p>
+            <p><strong>Reviews:</strong> {% if restaurant.reviews.count %} {{ restaurant.reviews.count }} {% else %} 0 {% endif %}</p>
+        </div>
+        <div class="col-lg-6">
+            <h5>{% if restaurant.owner == request.user %}
+                <a href="{% url 'edit_restaurant' restaurant.id %}"> ✏️ Edit</a>
+                {% else %}
+                <a href="{% url 'book_table' restaurant.id %}" class="carousel-btn">Book a Table</a>
+                {% endif %}
+                <a href="#"> 🔗 Share</a></h5>
+            {% if restaurant.image %}
+            <img src="{{ restaurant.image.url }}" alt="Restaurant Image" height = "300px" width="400px">
+            {% endif %}
+        <h2>Facilities</h2>
+        <div class="facilities">
+            <ul>
+                {% for facility in restaurant.facilities.all %}
+                    <li>{{ facility.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        </div>
+        </div>
+
+    <h2>Gallery</h2>
+    <div class="gallery">
+        {% for image in gallery_images %}
+            <img src="{{ image.image.url }}" height="200px" width="200px">
+        {% endfor %}
+        {% if restaurant.owner == request.user %}
+        <a href="{% url 'add_gallery' restaurant.id %}" class="btn">➕ Add Image</a>
+        {% endif %}
+    </div>
+
+    <h2>Menu</h2>
+    <div class="food-menu">
+        {% for item in menu_items %}
+            <div class="menu-item">
+                
+                <img src="{{ item.image.url }}" height="100px" width="200px">
+                <p><strong>{{ item.name }}</strong> - ₹{{ item.price }}</p>
+                <p>{% if item.is_veg %} 🟢 Veg {% else %} 🔴 Non-Veg {% endif %}</p>
+            </div>
+        {% endfor %}
+        {% if restaurant.owner == request.user %}
+        <a href="{% url 'add_item' restaurant.id %}" class="btn">➕ Add Item</a>
+        {% else %}
+        <div class="carousel-btn">
+            <h3>Reserve a Table Here</h3>
+            <a href="{% url 'book_table' restaurant.id %}" class="btn custom-btn">
+                <!-- <i class="fas fa-shopping-cart"></i>  -->
+               Book a Table
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+</div>
+{% endblock %}
