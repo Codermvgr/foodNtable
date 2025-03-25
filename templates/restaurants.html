@@ -33,7 +33,7 @@
                                 {% if restaurant.image %}
                                 <img src="/media/{{restaurant.image}}" style="height:250px; " alt="{{restaurant.name}}">
                                 {% else %}
-                                <img src="/static/img/restaurant.png" style="height:250px;" alt="restaurant image" >
+                                <img src="{% static 'img/restaurant.png' %}" style="height:250px;" alt="restaurant image" >
                                 {% endif %}
                             </div>
                             <div class="team-text">
