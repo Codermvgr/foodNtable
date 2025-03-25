@@ -25,7 +25,8 @@
         
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtQ_cbdfgnh6Jvc15g6btxCoomYcSjrKI&libraries=places"></script>
         <style>
-           .modal {
+          /* Default styles for larger screens */
+        .modal {
             display: none;
             position: fixed;
             z-index: 1000;
@@ -38,21 +39,49 @@
 
         .modal-content {
             background-color: white;
-            margin: 5% auto;  /* Increase top margin to move modal downward */
-            padding: 5px;
+            margin: 5% auto;  /* Center modal */
+            padding: 20px;
             width: 50%;
+            max-width: 600px; /* Prevents it from getting too large on big screens */
             text-align: center;
             border-radius: 8px;
-            position: relative;  /* Make it relative so that the close icon is positioned within it */
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
+        /* Close button */
         .close {
-            position: absolute;  /* Position the close icon absolutely */
+            position: absolute;
             top: 10px;
-            right: 10px;
+            right: 15px;
             font-size: 24px;
             cursor: pointer;
         }
+
+        /* 📱 Mobile-Friendly Adjustments */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 80%; /* Increase width for better fit */
+                padding: 15px;
+                margin: 10% auto; /* Adjust top margin for better visibility */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .modal-content {
+                width: 90%; /* Almost full width on very small screens */
+                height: 60%;
+                padding: 10px;
+                margin: 15% auto;
+            }
+
+            .close {
+                font-size: 20px; /* Slightly smaller close icon */
+                top: 5px;
+                right: 10px;
+            }
+        }
+
 
 
         </style>
@@ -79,7 +108,9 @@
                               <a href="{% url 'restaurants' %}" class="nav-item nav-link">Restaurants</a>
                               <a href="{% url 'all_dishes' %}" class="nav-item nav-link">Menu</a>
                               <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
-                              
+                              {% if not user.is_authenticated %}
+                              <a href="{% url 'register' %}" class="nav-item nav-link">Register</a>
+                              {% endif %}
                             
 
                                   

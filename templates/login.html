@@ -8,13 +8,10 @@
   <link rel="stylesheet" href="{% static 'auth/css/style.css' %}">
   <style>
     .container {
+      width : 100% !important;
       background-color: transparent;
-      width: 60%;
     }
-    .main .container {
-      background-color: white !important;
-      width: 60%;
-    }
+    
     .main {
       padding: 0;
       margin: 0;
@@ -57,18 +54,100 @@
       margin-right: 0.5rem;
     }
     .signin-content{
+      height: auto; 
+      overflow-y: auto;
+      justify-content: center;
+    }
+    .signin-container form {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      height: 100vh;
+      width: 90%; 
+      max-width: 400px; 
     }
+
+   
+@media (max-width: 768px) {
+  .container {
+        width: 96% !important;
+        max-width: 100% !important;
+       
+
+    }
+
+    .signin-content {
+      
+        width: 100% !important;
+    }
+
+    .signin-form {
+       
+        width: 100% !important;
+    }
+
+    form {
+        width: 100% !important;
+    }
+
+    .toggle-btns {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .toggle-btn {
+        width: 45%;
+        text-align: center;
+        padding: 0.6rem;
+    }
+
+    .google-btn {
+        font-size: 14px;
+        padding: 0.4rem;
+    }
+
+    .signin-content {
+        height: auto;
+        padding: 20px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 100%;
+    }
+
+    .toggle-btns {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .toggle-btn {
+        width: 100%;
+    }
+
+    .google-btn {
+        font-size: 13px;
+    }
+
+    .signin-content {
+        height: auto;
+        padding: 30px 0;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    .form-group input {
+        font-size: 14px;
+    }
+}
   </style>
 {% endblock %}
 {% block content %}
 <div class="main">
   <!-- Sign in Form -->
-  <section class="sign-in" style="padding-top:100px;">
+  <section class="sign-in" style="padding-top:10px;">
     <div class="container">
       <div class="signin-content">
         <div class="signin-form">

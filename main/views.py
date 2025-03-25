@@ -68,7 +68,7 @@ def contact_us(request):
         
         obj = Contact(name=name, email=email, subject=sub, message=msg)
         message= f"Name: {name}\nEmail: {email}\nSubject: {sub}\nMessage: {msg}"
-        send_mail(F"Contact Form - Food N Table by {name}", message, 'yourfoodntable@gmail.com', ['yourfoodntable@gmail.com'])
+        send_mail(F"Contact Form - Food N Table by {name}", message, 'yourfoodntable@gmail.com', ['yourfoodntable@gmail.com',email])
         obj.save()
         messages.success(request, f"Dear {name}, Thanks for your time!")
 
@@ -201,10 +201,12 @@ def dashboard(request):
     #My Orders 
     if profile.user_type == 'customer':
         orders = Order.objects.filter(customer=user).order_by('-id')
+        reviews = Review.objects.filter(user=user)
         bookings = Booking.objects.filter(
             user=request.user  
         ).order_by('-date', '-time') 
     else:
+        reviews = Review.objects.filter(restaurant__owner=request.user)
         restaurant = Restaurant.objects.get(owner=request.user)
         orders = Order.objects.filter(
             order_items__item__restaurant=restaurant
@@ -214,10 +216,12 @@ def dashboard(request):
         ).order_by('-date', '-time')  
      
         context['restaurant'] = restaurant
+    
     print(orders)
     context['orders']=orders  
     context['bookings'] = bookings
     context['user_type'] = profile.user_type 
+    context['reviews'] = reviews
     print(orders) 
     print(profile.user_type)
     return render(request, 'dashboard.html', context)

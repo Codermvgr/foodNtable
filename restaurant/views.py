@@ -12,7 +12,7 @@ from django.shortcuts import render
 from main.models import Profile, UserLocation
 from math import radians, cos, sin, asin, sqrt
 
-@login_required
+
 def restaurant_detail(request, restaurant_id):
     """View restaurant details page."""
     if restaurant_id is None:
@@ -152,7 +152,7 @@ def restaurant_list(request):
 
     return render(request, 'restaurants.html', {'restaurants': restaurants})
 
-
+@login_required(login_url='login')
 def book_table(request, restaurant_id):
     restaurant = get_object_or_404(Restaurant, id=restaurant_id)
 
