@@ -1,3 +1,4 @@
+{% load static %}
 {% extends "base.html" %}
 
 {% block head%}
@@ -30,7 +31,7 @@
                 <div class="owl-carousel">
                     <div class="carousel-item">
                         <div class="carousel-img">
-                            <img src="/static/img/carousel-food.jpeg" alt="Image">
+                            <img src="{% static 'img/carousel-food.jpeg' %}" alt="Image">
                         </div>
                         <div class="carousel-text">
                             <h1>Best <span>Quality</span> Ingredients</h1>
