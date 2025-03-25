@@ -16,7 +16,7 @@ SECRET_KEY = 'django-insecure-+06=x1aer^924_h5a5+l0sr)fb8p-9xd+#ctxqib1bi^ztu5dw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["3ffd-2401-4900-4e0c-5512-8ca7-6346-ac3e-18d8.ngrok-free.app","localhost","127.0.0.1"]
+ALLOWED_HOSTS = ["foodntable.onrender.com","localhost","127.0.0.1"]
 
 
 # Application definition
