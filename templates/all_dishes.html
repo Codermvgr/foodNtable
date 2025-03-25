@@ -52,9 +52,9 @@
                 <div class="food-item" style="background-color: lightgray;">
                 {% endif %}
                     {% if i.image %}
-                    <img src="/media/{{ i.image }}" alt="{{ i.name }} image" style="height: 200px;width: 100%;">
+                    <img src="/media/{{ i.image }}" data-src="" alt="{{ i.name }} image" style="height: 200px;width: 100%;">
                     {% else %}
-                    <a href="#" target="_blank"><img src="/media/restaurant.mp4" alt="{{ i.name }} image" style="height: 200px;width: 100%;"></a>
+                    <a href="#" target="_blank"><img src="/media/restaurant.mp4"  alt="{{ i.name }} image" style="height: 200px;width: 100%;"></a>
                     {% endif %}
                     <h4 class="my-3">{{ i.name | title}} </h4>
                     <!-- <p>{{ i.description }}</p> -->
