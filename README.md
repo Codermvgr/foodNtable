@@ -56,10 +56,15 @@ Ensure you have the following installed:
    ```
 
 ## Deployment
+
 Food N Table is hosted on **PythonAnywhere**. You can access the live version here: [Food N Table Live](https://foodntable.pythonanywhere.com/)
 
+
 ## Demo Video
-Watch the demo video of Food N Table here: [Demo Video](https://youtu.be/GL03nLPvuYo)
+Watch the demo video of Food N Table here:
+
+[![Food N Table Demo](https://img.youtube.com/vi/GL03nLPvuYo/0.jpg)](https://www.youtube.com/watch?v=GL03nLPvuYo)
+
 
 ## Contributing
 Contributions are welcome! To contribute:
