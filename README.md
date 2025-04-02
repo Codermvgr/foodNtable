@@ -16,21 +16,21 @@ Food N Table is a web application that enables users to book tables and order fo
 ## Tech Stack
 - **Backend:** Django (Python)
 - **Frontend:** HTML, CSS, JavaScript (optional frameworks like Bootstrap)
-- **Database:** SQLite (or PostgreSQL for production)
+- **Database:** SQLite 
 - **Payments:** Razorpay Integration
 - **Hosting:** PythonAnywhere
 
 ## Installation
 ### Prerequisites
 Ensure you have the following installed:
-- Python (>=3.8)
+- Python (>=6.0)
 - Virtualenv (optional but recommended)
 - Git
 
 ### Steps to Set Up Locally
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/FoodNTable.git
+   git clone https://github.com/Codermvgr/FoodNTable.git
    cd FoodNTable
    ```
 2. Create a virtual environment and activate it:
@@ -58,13 +58,6 @@ Ensure you have the following installed:
 ## Deployment
 Food N Table is hosted on **PythonAnywhere**. You can access the live version here: [Food N Table Live](https://foodntable.pythonanywhere.com/)
 
-To deploy:
-Food N Table is hosted on **PythonAnywhere**. To deploy:
-1. Push the code to GitHub.
-2. Clone it on PythonAnywhere.
-3. Set up a virtual environment and install dependencies.
-4. Configure the database and apply migrations.
-5. Set up WSGI and static files for deployment.
 
 ## Contributing
 Contributions are welcome! To contribute:
@@ -77,7 +70,7 @@ Contributions are welcome! To contribute:
 This project is licensed under the MIT License.
 
 ## Contact
-For any queries, reach out at: [your-email@example.com] or visit the project repository: [GitHub Repo](https://github.com/your-username/FoodNTable)
+For any queries, reach out at: [gullipallinagabhushan@gmail.com.com].
 
 Happy coding! 🚀
 
