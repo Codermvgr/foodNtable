@@ -58,6 +58,8 @@ Ensure you have the following installed:
 ## Deployment
 Food N Table is hosted on **PythonAnywhere**. You can access the live version here: [Food N Table Live](https://foodntable.pythonanywhere.com/)
 
+## Demo Video
+Watch the demo video of Food N Table here: [Demo Video](https://youtu.be/GL03nLPvuYo)
 
 ## Contributing
 Contributions are welcome! To contribute:
@@ -73,5 +75,3 @@ This project is licensed under the MIT License.
 For any queries, reach out at: [gullipallinagabhushan@gmail.com.com].
 
 Happy coding! 🚀
-
-
