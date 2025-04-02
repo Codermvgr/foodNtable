@@ -63,7 +63,7 @@ Food N Table is hosted on **PythonAnywhere**. You can access the live version he
 ## Demo Video
 Watch the demo video of Food N Table here:
 
-[![Food N Table Demo](https://img.youtube.com/vi/GL03nLPvuYo/0.jpg)](https://www.youtube.com/watch?v=GL03nLPvuYo)
+[![Food N Table Demo](https://img.youtube.com/vi/ID/0.jpg)](https://www.youtube.com/watch?v=ID)
 
 
 ## Contributing
